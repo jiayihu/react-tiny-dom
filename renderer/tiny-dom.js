@@ -33,7 +33,9 @@ const hostConfig = {
             domElement.textContent = propValue;
           }
           break;
-
+        case 'className':
+          domElement.setAttribute('class', propValue);
+          break;
         default:
           domElement.setAttribute(propName, propValue);
           break;

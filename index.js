@@ -18,7 +18,7 @@ class HelloWorld extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="container text-center pt-5">
         <h1>Hello Fevr</h1>
         <p>Counter: {this.state.value}</p>
       </div>

@@ -9,11 +9,13 @@ The purpose of this project is to show the meaning of each method of the `Reconc
 - Custom components
 - Text nodes
 - HTML Attributes
+- `className` attribute
 - `setState` with updates on Text Nodes
 
 ## What's not supported yet
 
 - Web Components
+- Event Listener props
 - `style` attribute
 - Update of HTML Attributes
 
