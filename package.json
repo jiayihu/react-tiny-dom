@@ -4,6 +4,9 @@
   "description": "A minimal implementation of react-dom to learn custom renderers",
   "main": "index.js",
   "scripts": {
+    "build": "webpack -p",
+    "copy": "cp index.html dist/index.html && cp favicon.ico dist/favicon.ico && mkdir dist/dist && cp dist/main.js dist/dist/main.js",
+    "deploy": "rimraf dist && npm run build && npm run copy && gh-pages -d dist",
     "start": "webpack-dev-server"
   },
   "author": "Jiayi Hu <jiayi.ghu@gmail.com>",
@@ -21,6 +24,8 @@
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
+    "gh-pages": "^1.1.0",
+    "rimraf": "^2.6.2",
     "webpack": "^3.8.1",
     "webpack-dev-server": "^2.9.4"
   },
