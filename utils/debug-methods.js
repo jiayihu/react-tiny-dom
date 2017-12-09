@@ -9,6 +9,8 @@ export function debugMethods(obj, excludes) {
           console.groupEnd();
           return target[name](...args);
         };
+      } else if (target[name] !== null && typeof target[name] === 'object') {
+        return debugMethods(target[name], excludes);
       } else {
         return Reflect.get(target, name, receiver);
       }
