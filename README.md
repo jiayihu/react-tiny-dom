@@ -31,7 +31,7 @@ npm start # Runs the example using react-tiny-dom
 
 ## FAQ
 
-### How can I avoid the logging of some methods?
+### How can I customize the logging of methods?
 
 By default the demo logs every method call of the Renderer, but you can pass a list of method names to avoid in the second parameter of `debugMethods`, when passing the `ReconcilerConfig` to `Reconciler`.
 
@@ -40,3 +40,5 @@ const TinyDOMRenderer = Reconciler(
   debugMethods(hostConfig, ['now', 'getChildHostContext', 'shouldSetTextContent'])
 );
 ```
+
+Obviously passing `hostConfig` directly to `Reconciler` will completely disable any method log.
