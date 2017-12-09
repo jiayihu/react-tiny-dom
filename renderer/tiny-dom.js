@@ -154,6 +154,9 @@ const hostConfig = {
 
     commitUpdate(domElement, updatePayload, type, oldProps, newProps, internalInstanceHandle) {
       updatePayload.forEach(propName => {
+        // children changes is done by the other methods like `commitTextUpdate`
+        if (propName === 'children') return;
+
         if (propName === 'style') {
           // Return a diff between the new and the old styles
           const styleDiffs = shallowDiff(oldProps.style, newProps.style);
@@ -166,7 +169,7 @@ const hostConfig = {
           }, {});
 
           setStyles(domElement, finalStyles);
-        } else if (newProps[propName] !== null && newProps[propName] !== undefined) {
+        } else if (newProps[propName] || typeof newProps[propName] === 'number') {
           domElement.setAttribute(propName, newProps[propName]);
         } else {
           if (isEventName(propName)) {
