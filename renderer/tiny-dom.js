@@ -50,6 +50,7 @@ const hostConfig = {
   },
 
   createTextInstance(text, rootContainerInstance, internalInstanceHandle) {
+    // A TextNode instance is returned because literal strings cannot change their value later on update
     return document.createTextNode(text);
   },
 

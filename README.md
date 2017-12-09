@@ -33,7 +33,7 @@ npm start # Runs the example using react-tiny-dom
 
 ## FAQ
 
-### How can I customize the logging of methods?
+### How can I customize the methods logs in the console?
 
 By default the demo logs every method call of the Renderer, but you can pass a list of method names to avoid in the second parameter of `debugMethods`, when passing the `ReconcilerConfig` to `Reconciler`.
 
