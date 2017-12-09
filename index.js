@@ -7,20 +7,26 @@ class HelloWorld extends React.Component {
     this.state = {
       value: 0,
     };
+
+    this.handleClick = this.handleClick.bind(this);
   }
 
-  componentDidMount() {
-    window.setTimeout(() => {
-      console.clear();
-      this.setState({ value: this.state.value + 1 });
-    }, 1000);
+  handleClick() {
+    this.setState({
+      value: this.state.value + 1,
+    });
   }
 
   render() {
     return (
       <div className="container text-center pt-5" tabIndex={this.state.value}>
-        <h1>I'm a component rendered by tiny-dom</h1>
+        <h1>react-tiny-dom</h1>
         <p>Counter: {this.state.value}</p>
+        <p>
+          <button onClick={this.handleClick} class="btn btn-outline-primary">
+            Primary
+          </button>
+        </p>
       </div>
     );
   }

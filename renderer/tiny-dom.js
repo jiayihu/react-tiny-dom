@@ -3,6 +3,14 @@ import Reconciler from 'react-reconciler';
 import emptyObject from 'fbjs/lib/emptyObject';
 import { debugMethods } from '../utils/debug-methods';
 
+function isUppercase(letter) {
+  return /[A-Z]/.test(letter);
+}
+
+function isEventName(propName) {
+  return propName.startsWith('on') && window.hasOwnProperty(propName.toLowerCase());
+}
+
 const hostConfig = {
   // appendChild for direct children
   appendInitialChild(parentInstance, child) {
@@ -25,20 +33,19 @@ const hostConfig = {
     Object.keys(props).forEach(propName => {
       const propValue = props[propName];
 
-      switch (propName) {
-        case 'children':
-          // Set the textContent only for literal string or number children, whereas
-          // nodes will be appended in `appendChild`
-          if (typeof propValue === 'string' || typeof propValue === 'number') {
-            domElement.textContent = propValue;
-          }
-          break;
-        case 'className':
-          domElement.setAttribute('class', propValue);
-          break;
-        default:
-          domElement.setAttribute(propName, propValue);
-          break;
+      if (propName === 'children') {
+        // Set the textContent only for literal string or number children, whereas
+        // nodes will be appended in `appendChild`
+        if (typeof propValue === 'string' || typeof propValue === 'number') {
+          domElement.textContent = propValue;
+        }
+      } else if (propName === 'className') {
+        domElement.setAttribute('class', propValue);
+      } else if (isEventName(propName)) {
+        const eventName = propName.toLowerCase().replace('on', '');
+        domElement.addEventListener(eventName, propValue);
+      } else {
+        domElement.setAttribute(propName, propValue);
       }
     });
 
@@ -130,7 +137,12 @@ const hostConfig = {
         if (newProps[propName] !== null && newProps[propName] !== undefined) {
           domElement.setAttribute(propName, newProps[propName]);
         } else {
-          domElement.removeAttribute(propName);
+          if (isEventName(propName)) {
+            const eventName = propName.toLowerCase().replace('on', '');
+            domElement.removeEventListener(eventName, oldProps[propName]);
+          } else {
+            domElement.removeAttribute(propName);
+          }
         }
       });
     },

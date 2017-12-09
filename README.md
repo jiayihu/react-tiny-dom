@@ -7,16 +7,20 @@ The purpose of this project is to show the meaning of each method of the `Reconc
 ## What's supported
 
 - Nested React components
+- `setState` with updates on Text Nodes or HTML attributes
 - Text nodes
 - HTML Attributes
 - `className` attribute
-- `setState` with updates on Text Nodes or HTML attributes
+- Event listeners
 
-## What's not supported yet
+## What's not supported yet, but I plan to
 
-- Event Listener props
+The following features of `react-dom` are not supported yet but I'll will add them:
+
 - `style` attribute
 - Web Components
+
+Any other feature which doesn't help explaining the `Renderer` API`, like `dangerouslySetInnerHTML`, won't be supported on purpose, to keep the source code minimal and focused on simplicity.
 
 ## Installation
 
