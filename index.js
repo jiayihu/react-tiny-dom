@@ -10,16 +10,16 @@ class HelloWorld extends React.Component {
   }
 
   componentDidMount() {
-    // window.setTimeout(() => {
-    //   console.clear();
-    //   this.setState({ value: this.state.value + 1 });
-    // }, 1000);
+    window.setTimeout(() => {
+      console.clear();
+      this.setState({ value: this.state.value + 1 });
+    }, 1000);
   }
 
   render() {
     return (
-      <div className="container text-center pt-5">
-        <h1>Hello Fevr</h1>
+      <div className="container text-center pt-5" tabIndex={this.state.value}>
+        <h1>I'm a component rendered by tiny-dom</h1>
         <p>Counter: {this.state.value}</p>
       </div>
     );

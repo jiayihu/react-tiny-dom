@@ -4,7 +4,7 @@ import emptyObject from 'fbjs/lib/emptyObject';
 import { debugMethods } from '../utils/debug-methods';
 
 const hostConfig = {
-  // appendChild for direct children of the root
+  // appendChild for direct children
   appendInitialChild(parentInstance, child) {
     parentInstance.appendChild(child);
   },
@@ -66,7 +66,16 @@ const hostConfig = {
   // Calculate the updatePayload
   prepareUpdate(domElement, type, oldProps, newProps) {
     // Return a diff between the new and the old props, children excluded
-    return [];
+    const uniqueProps = new Set([...Object.keys(oldProps), ...Object.keys(newProps)]);
+    const changedProps = Array.from(uniqueProps).filter(propName => {
+      // Children changes is handled by the other methods like `commitTextUpdate`
+      const isChildren = propName === 'children';
+      const isChanged = oldProps[propName] !== newProps[propName];
+
+      return !isChildren && isChanged;
+    });
+
+    return changedProps;
   },
 
   getRootHostContext(rootInstance) {
@@ -95,6 +104,7 @@ const hostConfig = {
       parentInstance.appendChild(child);
     },
 
+    // appendChild to root container
     appendChildToContainer(parentInstance, child) {
       parentInstance.appendChild(child);
     },
@@ -116,8 +126,13 @@ const hostConfig = {
     },
 
     commitUpdate(domElement, updatePayload, type, oldProps, newProps, internalInstanceHandle) {
-      console.log('-------------------');
-      console.log(updatePayload);
+      updatePayload.forEach(propName => {
+        if (newProps[propName] !== null && newProps[propName] !== undefined) {
+          domElement.setAttribute(propName, newProps[propName]);
+        } else {
+          domElement.removeAttribute(propName);
+        }
+      });
     },
 
     commitMount(domElement, type, newProps, internalInstanceHandle) {
@@ -134,7 +149,9 @@ const hostConfig = {
   },
 };
 
-const TinyDOMRenderer = Reconciler(debugMethods(hostConfig, ['now']));
+const TinyDOMRenderer = Reconciler(
+  debugMethods(hostConfig, ['now', 'getChildHostContext', 'shouldSetTextContent'])
+);
 
 export const ReactTinyDOM = {
   render(element, domContainer, callback) {
