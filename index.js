@@ -18,8 +18,12 @@ class HelloWorld extends React.Component {
   }
 
   render() {
+    const styles = {
+      backgroundColor: this.state.value % 2 === 0 ? 'red' : 'green',
+    };
+
     return (
-      <div className="container text-center pt-5" tabIndex={this.state.value}>
+      <div className="container text-center pt-5" tabIndex={this.state.value} style={styles}>
         <h1>react-tiny-dom</h1>
         <p>Counter: {this.state.value}</p>
         <p>
