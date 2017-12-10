@@ -63,7 +63,7 @@ class HelloWorld extends React.Component {
 ReactTinyDOM.render(<HelloWorld />, document.querySelector('.root'));
 
 /**
- * A more basic application to see the Renderer method calls in the console.
+ * A more basic application to see and understand better the Renderer method calls in the console.
  */
 
 // class HelloWorld extends React.Component {
@@ -93,7 +93,7 @@ ReactTinyDOM.render(<HelloWorld />, document.querySelector('.root'));
 //         <p>Counter: {this.state.value}</p>
 //         <p>
 //           <button onClick={this.handleClick} className="btn btn-outline-primary">
-//             Primary
+//             Counter
 //           </button>
 //         </p>
 //       </div>
