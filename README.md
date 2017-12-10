@@ -22,7 +22,7 @@ The following features of `react-dom` are not supported yet but I'll probably ad
 
 - Web Components
 
-Any other feature which doesn't help explaining the `Renderer` API`, like `dangerouslySetInnerHTML`, won't be supported on purpose, to keep the source code minimal and focused on simplicity.
+Any other feature which doesn't help explaining the `Renderer API`, like `dangerouslySetInnerHTML`, won't be supported on purpose, to keep the source code minimal and focused on simplicity.
 
 ## Installation
 
@@ -35,7 +35,7 @@ npm start # Runs the example using react-tiny-dom
 
 ### How can I customize the methods logs in the console?
 
-By default the demo logs every method call of the Renderer, but you can pass a list of method names to avoid in the second parameter of `debugMethods`, when passing the `ReconcilerConfig` to `Reconciler`.
+By default the demo logs most method calls of the Renderer, but you can pass a list of method names to exclude in the second parameter of `debugMethods`, when passing the `ReconcilerConfig` to `Reconciler`.
 
 ```js
 const TinyDOMRenderer = Reconciler(
