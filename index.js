@@ -3,17 +3,17 @@ import { ReactTinyDOM } from './renderer/tiny-dom';
 
 function Card(props) {
   return (
-    <div class="card" style={{ padding: '1rem', margin: '0 auto', width: '20rem' }}>
+    <div className="card" style={{ padding: '1rem', margin: '0 auto', width: '20rem' }}>
       <img
-        class="card-img-top"
+        className="card-img-top"
         src="https://s3-us-west-2.amazonaws.com/cosmicjs/9c2d95d0-27b0-11e7-b6ae-8108cf4caa96-react.svg"
         alt="React tiny DOM"
         style={{ height: '10rem' }}
       />
-      <div class="card-body">
-        <h4 class="card-title">{props.title}</h4>
-        <p class="card-text">{props.children}</p>
-        <button onClick={props.onClick} class="btn btn-outline-primary">
+      <div className="card-body">
+        <h4 className="card-title">{props.title}</h4>
+        <p className="card-text">{props.children}</p>
+        <button onClick={props.onClick} className="btn btn-outline-primary">
           {props.buttonText}
         </button>
       </div>
@@ -50,7 +50,7 @@ class HelloWorld extends React.Component {
           <p>A minimal implementation of react-dom using react-reconciler APIs</p>
           <p>Counter: {this.state.counter}</p>
           <p>
-            <button disabled={isEven} class="btn btn-light">
+            <button disabled={isEven} className="btn btn-light">
               I'm disabled based on the state.
             </button>
           </p>
@@ -92,7 +92,7 @@ ReactTinyDOM.render(<HelloWorld />, document.querySelector('.root'));
 //         <h1>react-tiny-dom</h1>
 //         <p>Counter: {this.state.value}</p>
 //         <p>
-//           <button onClick={this.handleClick} class="btn btn-outline-primary">
+//           <button onClick={this.handleClick} className="btn btn-outline-primary">
 //             Primary
 //           </button>
 //         </p>
