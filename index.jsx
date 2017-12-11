@@ -50,7 +50,7 @@ class HelloWorld extends React.Component {
           <p>A minimal implementation of react-dom using react-reconciler APIs</p>
           <p>Counter: {this.state.counter}</p>
           <p>
-            <button disabled={isEven} className="btn btn-light">
+            <button disabled={isEven} className="btn btn-info">
               I'm disabled based on the state.
             </button>
           </p>
