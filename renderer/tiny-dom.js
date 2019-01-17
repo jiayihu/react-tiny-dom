@@ -125,75 +125,75 @@ const hostConfig = {
     // noop
   },
 
+  supportsMutation: true,
+
   useSyncScheduling: true,
 
-  mutation: {
-    appendChild(parentInstance, child) {
-      parentInstance.appendChild(child);
-    },
+  appendChild(parentInstance, child) {
+    parentInstance.appendChild(child);
+  },
 
-    // appendChild to root container
-    appendChildToContainer(parentInstance, child) {
-      parentInstance.appendChild(child);
-    },
+  // appendChild to root container
+  appendChildToContainer(parentInstance, child) {
+    parentInstance.appendChild(child);
+  },
 
-    removeChild(parentInstance, child) {
-      parentInstance.removeChild(child);
-    },
+  removeChild(parentInstance, child) {
+    parentInstance.removeChild(child);
+  },
 
-    removeChildFromContainer(parentInstance, child) {
-      parentInstance.removeChild(child);
-    },
+  removeChildFromContainer(parentInstance, child) {
+    parentInstance.removeChild(child);
+  },
 
-    insertBefore(parentInstance, child, beforeChild) {
-      parentInstance.insertBefore(child, beforeChild);
-    },
+  insertBefore(parentInstance, child, beforeChild) {
+    parentInstance.insertBefore(child, beforeChild);
+  },
 
-    insertInContainerBefore(parentInstance, child, beforeChild) {
-      parentInstance.insertBefore(child, beforeChild);
-    },
+  insertInContainerBefore(parentInstance, child, beforeChild) {
+    parentInstance.insertBefore(child, beforeChild);
+  },
 
-    commitUpdate(domElement, updatePayload, type, oldProps, newProps, internalInstanceHandle) {
-      updatePayload.forEach(propName => {
-        // children changes is done by the other methods like `commitTextUpdate`
-        if (propName === 'children') return;
+  commitUpdate(domElement, updatePayload, type, oldProps, newProps, internalInstanceHandle) {
+    updatePayload.forEach(propName => {
+      // children changes is done by the other methods like `commitTextUpdate`
+      if (propName === 'children') return;
 
-        if (propName === 'style') {
-          // Return a diff between the new and the old styles
-          const styleDiffs = shallowDiff(oldProps.style, newProps.style);
-          const finalStyles = styleDiffs.reduce((acc, styleName) => {
-            // Style marked to be unset
-            if (!newProps.style[styleName]) acc[styleName] = '';
-            else acc[styleName] = newProps.style[styleName];
+      if (propName === 'style') {
+        // Return a diff between the new and the old styles
+        const styleDiffs = shallowDiff(oldProps.style, newProps.style);
+        const finalStyles = styleDiffs.reduce((acc, styleName) => {
+          // Style marked to be unset
+          if (!newProps.style[styleName]) acc[styleName] = '';
+          else acc[styleName] = newProps.style[styleName];
 
-            return acc;
-          }, {});
+          return acc;
+        }, {});
 
-          setStyles(domElement, finalStyles);
-        } else if (newProps[propName] || typeof newProps[propName] === 'number') {
-          domElement.setAttribute(propName, newProps[propName]);
+        setStyles(domElement, finalStyles);
+      } else if (newProps[propName] || typeof newProps[propName] === 'number') {
+        domElement.setAttribute(propName, newProps[propName]);
+      } else {
+        if (isEventName(propName)) {
+          const eventName = propName.toLowerCase().replace('on', '');
+          domElement.removeEventListener(eventName, oldProps[propName]);
         } else {
-          if (isEventName(propName)) {
-            const eventName = propName.toLowerCase().replace('on', '');
-            domElement.removeEventListener(eventName, oldProps[propName]);
-          } else {
-            domElement.removeAttribute(propName);
-          }
+          domElement.removeAttribute(propName);
         }
-      });
-    },
+      }
+    });
+  },
 
-    commitMount(domElement, type, newProps, internalInstanceHandle) {
-      domElement.focus();
-    },
+  commitMount(domElement, type, newProps, internalInstanceHandle) {
+    domElement.focus();
+  },
 
-    commitTextUpdate(textInstance, oldText, newText) {
-      textInstance.nodeValue = newText;
-    },
+  commitTextUpdate(textInstance, oldText, newText) {
+    textInstance.nodeValue = newText;
+  },
 
-    resetTextContent(domElement) {
-      domElement.textContent = '';
-    },
+  resetTextContent(domElement) {
+    domElement.textContent = '';
   },
 };
 

@@ -13,9 +13,9 @@
   "license": "MIT",
   "dependencies": {
     "deep-diff": "^0.3.8",
-    "fbjs": "^0.8.16",
-    "react": "^16.1.1",
-    "react-reconciler": "^0.6.0"
+    "fbjs": "^1.0.0",
+    "react": "^16.6.1",
+    "react-reconciler": "^0.18.0"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
