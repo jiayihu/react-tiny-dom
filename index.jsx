@@ -22,16 +22,11 @@ function Card(props) {
 }
 
 class HelloWorld extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      counter: 0,
-    };
+  state = {
+    counter: 0,
+  };
 
-    this.handleClick = this.handleClick.bind(this);
-  }
-
-  handleClick() {
+  handleClick = () => {
     console.clear(); // Clear the console to show only new method calls
     this.setState({
       counter: this.state.counter + 1,
@@ -50,7 +45,7 @@ class HelloWorld extends React.Component {
           <p>A minimal implementation of react-dom using react-reconciler APIs</p>
           <p>Counter: {this.state.counter}</p>
           <p>
-            <button disabled={isEven} className="btn btn-info">
+            <button disabled={isEven} className="btn btn-light">
               I'm disabled based on the state.
             </button>
           </p>
