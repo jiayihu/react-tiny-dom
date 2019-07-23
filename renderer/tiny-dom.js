@@ -172,7 +172,13 @@ const hostConfig = {
 
         setStyles(domElement, finalStyles);
       } else if (newProps[propName] || typeof newProps[propName] === 'number') {
-        domElement.setAttribute(propName, newProps[propName]);
+        if (isEventName(propName)) {
+          const eventName = propName.toLowerCase().replace('on', '');
+          domElement.removeEventListener(eventName, oldProps[propName]);
+          domElement.addEventListener(eventName, newProps[propName]);
+        } else {
+          domElement.setAttribute(propName, newProps[propName]);
+        }
       } else {
         if (isEventName(propName)) {
           const eventName = propName.toLowerCase().replace('on', '');
