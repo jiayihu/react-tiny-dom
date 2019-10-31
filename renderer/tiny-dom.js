@@ -157,7 +157,13 @@ const hostConfig = {
   commitUpdate(domElement, updatePayload, type, oldProps, newProps, internalInstanceHandle) {
     updatePayload.forEach(propName => {
       // children changes is done by the other methods like `commitTextUpdate`
-      if (propName === 'children') return;
+      if (propName === 'children') {
+        const propValue = newProps[propName];
+        if (typeof propValue === 'string' || typeof propValue === 'number') {
+          domElement.textContent = propValue;
+        }
+        return;
+      }
 
       if (propName === 'style') {
         // Return a diff between the new and the old styles
